@@ -47,7 +47,7 @@ function Jobs(){
         type
        }
        console.log(img)
-       fetch("http://localhost:4000/jobs", {
+       fetch("https://capstonebackend--q.herokuapp.com/jobs", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

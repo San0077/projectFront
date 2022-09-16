@@ -81,7 +81,7 @@ export function Home() {
   const [State, setuseState]= useState(obj)
   const [Sort, setsort]= useState(State)
 
-   fetch("http://localhost:4000/").then(data=>data.json()).then(data=>{
+   fetch("https://capstonebackend--q.herokuapp.com/").then(data=>data.json()).then(data=>{
        setuseState(data)
        
    })
