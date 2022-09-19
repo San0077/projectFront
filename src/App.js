@@ -3,6 +3,7 @@ import React,{useState} from 'react';
 import {Routes, Route,useNavigate ,Navigate} from 'react-router-dom';
 import {NavBar} from "./Navbar"
 import { Home } from './components/Home';
+import { Discover } from './components/Discover';
 import { Login } from './components/Login';
 import { Signin } from './components/Signin';
 import TextField from '@mui/material/TextField';
@@ -15,7 +16,7 @@ function App() {
        <NavBar/>
      <Routes>
        <Route path="/" element={<Home/>}></Route>
-       <Route  path="/discover"  element={<Home/>}/>
+       <Route  path="/discover"  element={<Discover/>}/>
         <Route  path="/signin"  element={<Signin/>}/>
         <Route  path="/Login"  element={<Login/>}/>
        <Route  path="/jobs"  element={<RequiredAuth><Jobs/></RequiredAuth>}/>

@@ -80,39 +80,67 @@ type:"project"
 export function Home() {
   const [State, setuseState]= useState(obj)
   const [Sort, setsort]= useState(State)
-
+  const [search,setsearch]= useState("")
+  const [input,setinput]= useState()
+  var presidentInput = document.getElementsByClassName('inputField').value;
    fetch("https://capstonebackend--q.herokuapp.com/").then(data=>data.json()).then(data=>{
        setuseState(data)
-       
+      
    })
    
   const changeTheme = (e,d) => {
     const style = {
       color: withTheme,
-    };
-    if (document.querySelectorAll("div").id == e) {
-      const id = document.getElementById(e);
-      id.className = "TitleName";
-    }
-     var pizz = State.filter(data => data.type.includes(d));
-     setsort(pizz);
+    }; 
+    var pizz = State.filter(data => data.type.toString().toLowerCase().includes(d.toString().toLowerCase()));
+    setsort(pizz);
+      
+    var element = document.getElementById("1");
+    var element1 = document.getElementById("2");
+    var element2 = document.getElementById("3");
+    var element3 = document.getElementById("4");
+    var element4 = document.getElementById("5");
+    var element5 = document.getElementById("6");
+    element.classList.remove("TitleName");
+    element1.classList.remove("TitleName");
+    element2.classList.remove("TitleName");
+    element3.classList.remove("TitleName");
+    element4.classList.remove("TitleName");
+    element5.classList.remove("TitleName");
+    element5.classList.remove("TitleName");
+      const id =document.getElementById(e)
+       id.classList.add("TitleName")
+      
+    
   };
   return (
     <>
-
-
       <div className="searchBar border">
         <div className="inputsandicons">
           <i class="fa fa-search fa-2x search" aria-hidden="true"></i>
-          <input class="input-field" className="inputField" type="text" placeholder='Search a creative world at Work' />
+          <input class="input-field"   className="inputField" type="text" 
+          placeholder='Search a creative world at Work'
+          onChange={(e)=>setsearch(e.target.value)} />
+       { search ? <div className="findValue">{
+              State.filter(data=>{
+                  if(search=="")return 0
+                      else if( data.type.toString().toLowerCase().includes(search.toString().toLowerCase()))
+                       return data
+            }
+          ).map(e=><div  onClick={() =>{
+                  setsearch("")
+                  changeTheme("",e.type)
+                  
+          }}>{e.type}</div>)} </div>
+         :""}
         </div>
         <div className="Titled">
           <div id="1" name="q1" className="s" onClick={() => changeTheme("1","project")}>Projects</div>
-          <div id="2" name="w1" className="s" onClick={() => changeTheme("2" ,"Images")}>Images</div>
-          <div id="3" name="e1" className="s" onClick={() => changeTheme("3","Protypes")}>Protypes</div>
-          <div id="4" name="r1" className="s" onClick={() => changeTheme("4","Streams")}>Streams</div>
-          <div id="5" name="qg" className="s" onClick={() => changeTheme("5","People")}>People</div>
-          <div id="6" name="q0" className="s" onClick={() => changeTheme("6","Moodboards")}>Moodboards</div>
+          <div id="2" name="w1" className="s" onClick={() => changeTheme("2" ,"images")}>Images</div>
+          <div id="3" name="e1" className="s" onClick={() => changeTheme("3","protypes")}>Protypes</div>
+          <div id="4" name="r1" className="s" onClick={() => changeTheme("4","streams")}>Streams</div>
+          <div id="5" name="qg" className="s" onClick={() => changeTheme("5","people")}>People</div>
+          <div id="6" name="q0" className="s" onClick={() => changeTheme("6","moodboards")}>Moodboards</div>
 
         </div>
       </div>
@@ -202,7 +230,6 @@ export function Home() {
   );
 }
 function Cards({sort}){
-
   return(
    
         <div className="container">
